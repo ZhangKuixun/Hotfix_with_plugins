@@ -22,7 +22,7 @@ public class Utils {
 
 
     public static void printLog() {
-        String error = null;
+        String error = "go here";
         Log.e("keivn", error);
 
     }
