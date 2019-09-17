@@ -3,6 +3,7 @@ package com.kevin.andfix.andfix;
 import android.content.Context;
 
 import com.alipay.euler.andfix.patch.PatchManager;
+import com.kevin.andfix.tools.Utils;
 
 import java.io.IOException;
 

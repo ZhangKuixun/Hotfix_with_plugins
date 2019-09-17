@@ -1,11 +1,13 @@
-package com.kevin.andfix.andfix;
+package com.kevin.andfix.tools;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 public class Utils {
 
+    //获取版本名称
     public static String getVersionName(Context context) {
         String versionName = "1.0.0";
         try {
@@ -16,5 +18,12 @@ public class Utils {
             e.printStackTrace();
         }
         return versionName;
+    }
+
+
+    public static void printLog() {
+        String error = null;
+        Log.e("keivn", error);
+
     }
 }
