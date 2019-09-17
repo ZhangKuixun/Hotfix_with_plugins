@@ -1,0 +1,1 @@
+apkpatch -f new.apk -t old.apk -o output -k C:/Users/ZhangKuixun/releaseKey/AndFix.jks -p 123456 -a kevin -e 123456
