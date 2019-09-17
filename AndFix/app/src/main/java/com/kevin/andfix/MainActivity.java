@@ -1,13 +1,13 @@
 package com.kevin.andfix;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.kevin.andfix.andfix.AndFixPatchManager;
+import com.kevin.andfix.andfix.AndFixService;
 import com.kevin.andfix.tools.Utils;
-
-import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,12 +19,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPatchDir = getExternalCacheDir().getAbsoluteFile() + "/apatch/";
-        //为了创建我们的文件夹
-        File file = new File(mPatchDir);
-        if (file == null || file.exists()) {
-            file.mkdir();
-        }
+//        mPatchDir = getExternalCacheDir().getAbsoluteFile() + "/apatch/";
+//        //为了创建我们的文件夹
+//        File file = new File(mPatchDir);
+//        if (file == null || file.exists()) {
+//            file.mkdir();
+//        }
+
+        //AndFix组件调试
+        startPatchService();
+    }
+
+    //最好应用一启动，AndFixService 就启动起来。更早的让应用检查是否有patch文件。
+    //实际开发中，在 launchActivity 中就启动 AndFixService
+    private void startPatchService() {
+        Intent intent = new Intent(this, AndFixService.class);
+        startService(intent);
     }
 
     //创建bug
