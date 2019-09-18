@@ -32,7 +32,7 @@ public class TinkerManager {
 
 
     //完成patch文件的加载
-    public void loadPatch(String path) {
+    public static void loadPatch(String path) {
         if (Tinker.isTinkerInstalled()) {
 
             TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), path);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.kevin.tinker">
 
     <application
@@ -9,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,5 +20,11 @@
             </intent-filter>
         </activity>
     </application>
+
+    <!--实际开发中，tinker_id_后面跟的一串数字是versionName或者versioncode-->
+    <!--TINKER_ID表明patch文件是否可以安装到apk中。检查patch文件的TinkerId和apk的TinkerId是否一样。-->
+    <meta-data
+        android:name="TINKER_ID"
+        android:value="tinker_id_1" />
 
 </manifest>
