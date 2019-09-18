@@ -9,6 +9,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -25,4 +26,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //生成application时使用
+    compileOnly 'com.tencent.tinker:tinker-android-anno:1.7.7'
+    annotationProcessor 'com.tencent.tinker:tinker-android-anno:1.7.7'
+
+    //Tinker的核心库
+    implementation 'com.tencent.tinker:tinker-android-lib:1.7.7'
+
+    implementation 'com.android.support:multidex:1.0.3'
+
 }
