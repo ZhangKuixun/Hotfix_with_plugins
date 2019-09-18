@@ -1,6 +1,7 @@
 package com.kevin.tinker.tinker;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.tencent.tinker.entry.ApplicationLike;
 import com.tencent.tinker.lib.tinker.Tinker;
@@ -33,9 +34,12 @@ public class TinkerManager {
 
     //完成patch文件的加载
     public static void loadPatch(String path) {
+        Log.e("kevin", "--loadPatch");
         if (Tinker.isTinkerInstalled()) {
 
+            Log.e("kevin", "TinkerInstaller.onReceiveUpgradePatch");
             TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), path);
+            Log.e("kevin", "TinkerInstaller.onReceiveUpgradePatch--");
         }
     }
 

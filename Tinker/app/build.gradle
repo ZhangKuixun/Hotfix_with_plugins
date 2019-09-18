@@ -35,13 +35,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //生成application时使用
-    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") {
-        changing = true
-    }
-    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+    annotationProcessor("com.tencent.tinker:tinker-android-anno:1.9.14")
+    compileOnly("com.tencent.tinker:tinker-android-anno:1.9.14")
 
     //Tinker的核心库
-    api("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
+    api("com.tencent.tinker:tinker-android-lib:1.9.14")
 
     implementation 'com.android.support:multidex:1.0.3'
 
@@ -49,11 +47,11 @@ dependencies {
 
 //变量语句块
 ext {
-    tinkerEnabled = true
-    tinkerOldApkPath = "${bakPath}/"
+    tinkerEnabled = false
+    tinkerOldApkPath = "${bakPath}/app-release-0918-18-56-45.apk"
     tinkerId = "1.0"
-    tinkerApplyMappingPath = "${bakPath}/"
-    tinkerApplyResourcePath = "${bakPath}/"
+    tinkerApplyMappingPath = "${bakPath}/app-release-0918-18-56-45-mapping.txt"
+    tinkerApplyResourcePath = "${bakPath}/app-release-0918-18-56-45-R.txt"
 }
 
 //获取是否使用tinker编译
