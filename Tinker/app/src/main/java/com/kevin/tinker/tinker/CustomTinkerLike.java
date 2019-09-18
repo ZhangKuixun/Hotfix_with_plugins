@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.support.multidex.MultiDex;
 
 import com.tencent.tinker.anno.DefaultLifeCycle;
-import com.tencent.tinker.loader.app.ApplicationLike;
+import com.tencent.tinker.entry.ApplicationLike;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 
 /**

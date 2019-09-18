@@ -2,9 +2,9 @@ package com.kevin.tinker.tinker;
 
 import android.content.Context;
 
+import com.tencent.tinker.entry.ApplicationLike;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
-import com.tencent.tinker.loader.app.ApplicationLike;
 
 /**
  * 对Tinker的所有api做一层封装
