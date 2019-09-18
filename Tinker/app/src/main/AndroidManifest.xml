@@ -20,11 +20,12 @@
             </intent-filter>
         </activity>
 
-        <!--实际开发中，tinker_id_后面跟的一串数字是versionName或者versioncode-->
-        <!--TINKER_ID表明patch文件是否可以安装到apk中。检查patch文件的TinkerId和apk的TinkerId是否一样。-->
-        <meta-data
-            android:name="TINKER_ID"
-            android:value="tinker_id_1.0" />
+        <!--gradle文件不需要这个，命令行需要-->
+        <!--&lt;!&ndash;实际开发中，tinker_id_后面跟的一串数字是versionName或者versioncode&ndash;&gt;-->
+        <!--&lt;!&ndash;TINKER_ID表明patch文件是否可以安装到apk中。检查patch文件的TinkerId和apk的TinkerId是否一样。&ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="TINKER_ID"-->
+            <!--android:value="tinker_id_1.0" />-->
 
     </application>
 </manifest>

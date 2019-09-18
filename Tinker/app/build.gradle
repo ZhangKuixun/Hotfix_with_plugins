@@ -28,11 +28,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //生成application时使用
-    compileOnly 'com.tencent.tinker:tinker-android-anno:1.7.7'
-    annotationProcessor 'com.tencent.tinker:tinker-android-anno:1.7.7'
+    compileOnly "com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}"
+    annotationProcessor "com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}"
 
     //Tinker的核心库
-    implementation 'com.tencent.tinker:tinker-android-lib:1.7.7'
+    implementation "com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}"
 
     implementation 'com.android.support:multidex:1.0.3'
 
