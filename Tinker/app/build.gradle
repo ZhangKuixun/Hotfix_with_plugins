@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 def javaVersion = JavaVersion.VERSION_1_7
-def backPath = file("${buildDir}/backApk")//buildDir->app/build/
+def bakPath = file("${buildDir}/bakApk")//buildDir->app/build/
 
 android {
     compileSdkVersion 28
@@ -44,7 +44,7 @@ dependencies {
 //变量语句块
 ext {
     tinkerEnable = true
-    tinkerOldApkPath = "${backPath}/"
+    tinkerOldApkPath = "${bakPath}/"
     tinkerId = "1.0"
     tinkerApplyMappingPath = "${bakPath}/"
     tinkerApplyResourcePath = "${bakPath}/"
