@@ -76,6 +76,20 @@ android {
             jniLibs.srcDirs = ['libs']
         }
     }
+
+    /*配置渠道*/
+    flavorDimensions "version"
+    productFlavors {
+        yingyongbao {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "yingyongbao"]
+        }
+        xiaomi {
+            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "xiaomi"]
+        }
+        productFlavors.all {
+            flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+        }
+    }
 }
 
 dependencies {
@@ -95,18 +109,21 @@ dependencies {
     }
     compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
 
-
     implementation 'com.android.support:multidex:1.0.3'
+
+    implementation  'com.umeng.umsdk:analytics:latest.integration'
+    implementation  'com.umeng.umsdk:common:latest.integration'
 
 }
 
 //变量语句块
 ext {
     tinkerEnabled = true
-    tinkerOldApkPath = "${bakPath}/app-release-0919-13-59-54.apk"
+    tinkerOldApkPath = "${bakPath}/app-0919-18-13-49"
     tinkerId = "1.0"
-    tinkerApplyMappingPath = "${bakPath}/app-release-0919-13-59-54-mapping.txt"
-    tinkerApplyResourcePath = "${bakPath}/app-release-0919-13-59-54-R.txt"
+    tinkerApplyMappingPath = "${bakPath}/app-0919-18-13-49"
+    tinkerApplyResourcePath = "${bakPath}/app-0919-18-13-49"
+    tinkerBuildFlavorDirectory = "${bakPath}/app-0919-18-13-49"
 }
 
 //获取是否使用tinker编译
@@ -128,6 +145,10 @@ def getApplyResourceMappingPath() {
 
 def getTinkerIdValue() {
     return ext.tinkerId
+}
+
+def getTinkerBuildFlavorDirectory(){
+    return ext.tinkerBuildFlavorDirectory
 }
 
 if (buildWithTinker()) {
@@ -271,6 +292,46 @@ if (buildWithTinker()) {
                             fileName.replace("R.txt", "${newFileNamePrefix}-R.txt")
                         }
                     }
+                }
+            }
+        }
+    }
+
+    project.afterEvaluate {
+        //sample use for build all flavor for one time
+        if (hasFlavors) {
+            task(tinkerPatchAllFlavorRelease) {
+                group = 'tinker'
+                def originOldPath = getTinkerBuildFlavorDirectory()
+                for (String flavor : flavors) {
+                    def tinkerTask = tasks.getByName("tinkerPatch${flavor.capitalize()}Release")
+                    dependsOn tinkerTask
+                    def preAssembleTask = tasks.getByName("process${flavor.capitalize()}ReleaseManifest")
+                    preAssembleTask.doFirst {
+                        String flavorName = preAssembleTask.name.substring(7, 8).toLowerCase() + preAssembleTask.name.substring(8, preAssembleTask.name.length() - 15)
+                        project.tinkerPatch.oldApk = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-release.apk"
+                        project.tinkerPatch.buildConfig.applyMapping = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-release-mapping.txt"
+                        project.tinkerPatch.buildConfig.applyResourceMapping = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-release-R.txt"
+
+                    }
+
+                }
+            }
+
+            task(tinkerPatchAllFlavorDebug) {
+                group = 'tinker'
+                def originOldPath = getTinkerBuildFlavorDirectory()
+                for (String flavor : flavors) {
+                    def tinkerTask = tasks.getByName("tinkerPatch${flavor.capitalize()}Debug")
+                    dependsOn tinkerTask
+                    def preAssembleTask = tasks.getByName("process${flavor.capitalize()}DebugManifest")
+                    preAssembleTask.doFirst {
+                        String flavorName = preAssembleTask.name.substring(7, 8).toLowerCase() + preAssembleTask.name.substring(8, preAssembleTask.name.length() - 13)
+                        project.tinkerPatch.oldApk = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-debug.apk"
+                        project.tinkerPatch.buildConfig.applyMapping = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-debug-mapping.txt"
+                        project.tinkerPatch.buildConfig.applyResourceMapping = "${originOldPath}/${flavorName}/${project.name}-${flavorName}-debug-R.txt"
+                    }
+
                 }
             }
         }

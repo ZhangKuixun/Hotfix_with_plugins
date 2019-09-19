@@ -6,6 +6,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <!--友盟统计所需权限-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
         android:name=".tinker.MyTinkerApplication"
         android:allowBackup="true"
@@ -30,6 +36,11 @@
         <!--<meta-data-->
         <!--android:name="TINKER_ID"-->
         <!--android:value="tinker_id_1.0" />-->
+
+        <!--value的值填写你在友盟后台申请的应用Appkey-->
+        <meta-data android:value="5d8345080cafb2b2ac000a0f" android:name="UMENG_APPKEY"/>
+        <!--value的值填写渠道名称，例如yingyongbao。这里设置动态渠道名称变量-->
+        <meta-data android:value="${UMENG_CHANNEL_VALUE}" android:name="UMENG_CHANNEL"/>
 
     </application>
 </manifest>
