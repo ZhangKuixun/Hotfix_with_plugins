@@ -34,7 +34,7 @@ public class TinkerManager {
 
     //完成patch文件的加载
     public static void loadPatch(String path) {
-        Log.e("kevin", "--loadPatch");
+        Log.e("kevin", "--loadPatch " + path);
         if (Tinker.isTinkerInstalled()) {
 
             Log.e("kevin", "TinkerInstaller.onReceiveUpgradePatch");

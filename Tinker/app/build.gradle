@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 
-def javaVersion = JavaVersion.VERSION_1_7
+def javaVersion = JavaVersion.VERSION_1_8
 def bakPath = file("${buildDir}/bakApk")//buildDir->app/build/
 
 android {
@@ -18,10 +18,62 @@ android {
         sourceCompatibility javaVersion
         targetCompatibility javaVersion
     }
+
+    dexOptions {
+        jumboMode = true
+
+        javaMaxHeapSize "2g"
+
+        additionalParameters = [//dex参数详见 dx --help
+                                '--multi-dex',//多分包
+                                '--set-max-idx-number=60000',//每个包内方法数上限
+                                '--main-dex-list=' + projectDir + '/multiDexKeep.txt',//打包进主classes.dex的文件列表
+                                '--minimal-main-dex'//使上一句生效
+        ]
+
+    }
+
+    //配置签名，这里使用demo中的签名文件，真实项目中替换成自己的
+    signingConfigs {
+        release {
+            try {
+                storeFile file("C:/Users/ZhangKuixun/releaseKey/AndFix.jks")
+                storePassword "123456"
+                keyAlias "kevin"
+                keyPassword "123456"
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
+        }
+        debug {
+            try {
+                storeFile file("C:/Users/ZhangKuixun/releaseKey/AndFix.jks")
+                storePassword "123456"
+                keyAlias "kevin"
+                keyPassword "123456"
+            } catch (ex) {
+                throw new InvalidUserDataException(ex.toString())
+            }
+        }
+    }
+
+    //release包开始混淆
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), project.file('proguard-rules.pro')
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -34,12 +86,15 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    //生成application时使用
-    annotationProcessor("com.tencent.tinker:tinker-android-anno:1.9.14")
-    compileOnly("com.tencent.tinker:tinker-android-anno:1.9.14")
-
     //Tinker的核心库
-    api("com.tencent.tinker:tinker-android-lib:1.9.14")
+    api("com.tencent.tinker:tinker-android-lib:${TINKER_VERSION}") { changing = true }
+
+    //生成application时使用
+    annotationProcessor("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") {
+        changing = true
+    }
+    compileOnly("com.tencent.tinker:tinker-android-anno:${TINKER_VERSION}") { changing = true }
+
 
     implementation 'com.android.support:multidex:1.0.3'
 
@@ -47,11 +102,11 @@ dependencies {
 
 //变量语句块
 ext {
-    tinkerEnabled = false
-    tinkerOldApkPath = "${bakPath}/app-release-0918-18-56-45.apk"
+    tinkerEnabled = true
+    tinkerOldApkPath = "${bakPath}/app-release-0919-13-59-54.apk"
     tinkerId = "1.0"
-    tinkerApplyMappingPath = "${bakPath}/app-release-0918-18-56-45-mapping.txt"
-    tinkerApplyResourcePath = "${bakPath}/app-release-0918-18-56-45-R.txt"
+    tinkerApplyMappingPath = "${bakPath}/app-release-0919-13-59-54-mapping.txt"
+    tinkerApplyResourcePath = "${bakPath}/app-release-0919-13-59-54-R.txt"
 }
 
 //获取是否使用tinker编译
