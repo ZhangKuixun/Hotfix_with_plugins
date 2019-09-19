@@ -9,6 +9,7 @@ import com.tencent.tinker.anno.DefaultLifeCycle;
 import com.tencent.tinker.entry.ApplicationLike;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 
+
 /**
  * 初始化Tinker。
  * <p>
