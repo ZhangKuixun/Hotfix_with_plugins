@@ -3,9 +3,14 @@ package com.kevin.tinker.tinker;
 import android.content.Context;
 import android.util.Log;
 
+import com.kevin.tinker.CustomPatchListener;
 import com.tencent.tinker.entry.ApplicationLike;
+import com.tencent.tinker.lib.patch.UpgradePatch;
+import com.tencent.tinker.lib.reporter.DefaultLoadReporter;
+import com.tencent.tinker.lib.reporter.DefaultPatchReporter;
 import com.tencent.tinker.lib.tinker.Tinker;
 import com.tencent.tinker.lib.tinker.TinkerInstaller;
+
 
 /**
  * 对Tinker的所有api做一层封装
@@ -16,10 +21,10 @@ public class TinkerManager {
     //Tinker委托类
     private static ApplicationLike mAppLike;
 
+    private static CustomPatchListener mPatchListener;
+
     /**
      * 完成Tinker的初始化
-     *
-     * @param applicationLike
      */
     public static void installTinker(ApplicationLike applicationLike) {
         mAppLike = applicationLike;
@@ -27,15 +32,31 @@ public class TinkerManager {
             return;
         }
 
+        mPatchListener = new CustomPatchListener(getApplicationContext());//初始化CustomPatchListener
+
         TinkerInstaller.install(mAppLike);//完成Tinker初始化
+
+        DefaultLoadReporter loadReporter = new DefaultLoadReporter(getApplicationContext());
+        DefaultPatchReporter patchReporter = new DefaultPatchReporter(getApplicationContext());
+
+        UpgradePatch upgradePatchProcessor = new UpgradePatch();//决定patch文件的安装策略，这个在实际开发中基本不会去自定义
+
+        TinkerInstaller.install(applicationLike,
+                                loadReporter,
+                                patchReporter,
+                                mPatchListener,
+                                CustomResultService.class,
+                                upgradePatchProcessor);
+
         isInstalled = true;
     }
 
 
     //完成patch文件的加载
-    public static void loadPatch(String path) {
+    public static void loadPatch(String path,String md5Value) {
         Log.e("kevin", "--loadPatch " + path);
         if (Tinker.isTinkerInstalled()) {
+            mPatchListener.setCurrentMD5(md5Value);
 
             Log.e("kevin", "TinkerInstaller.onReceiveUpgradePatch");
             TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), path);

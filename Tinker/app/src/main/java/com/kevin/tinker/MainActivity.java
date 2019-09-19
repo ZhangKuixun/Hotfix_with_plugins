@@ -6,6 +6,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.kevin.tinker.data.BasePatchInfo;
 import com.kevin.tinker.tinker.TinkerManager;
 import com.umeng.analytics.MobclickAgent;
 
@@ -15,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String FILE_END = ".apk";
     private String mPatchDir;
+
+    private BasePatchInfo mBasePatchInfo;
 
     @RequiresApi(api = Build.VERSION_CODES.FROYO)
     @Override
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadPatch(View view) {
-        TinkerManager.loadPatch(getPatchName());
+        TinkerManager.loadPatch(getPatchName(), mBasePatchInfo.data.md5);
     }
 
 

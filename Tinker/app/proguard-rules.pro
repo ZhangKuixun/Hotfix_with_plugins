@@ -20,6 +20,13 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
+-keepattributes SourceFile,LineNumberTable
+
+-dontwarn com.google.**
+
+-dontwarn com.android.**
+
+
 -keep class com.umeng.** {*;}
 
 -keepclassmembers class * {

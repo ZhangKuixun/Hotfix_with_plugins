@@ -2,6 +2,7 @@ package com.kevin.tinker.tinker;
 
 import android.annotation.SuppressLint;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.IBinder;
@@ -41,6 +42,10 @@ public class TinkerService extends Service {
 
         }
     };
+
+    public static void runPatchService(Context context, String path) {
+
+    }
 
     @Override
     public IBinder onBind(Intent intent) {

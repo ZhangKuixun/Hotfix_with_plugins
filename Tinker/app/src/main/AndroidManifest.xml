@@ -28,7 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".tinker.TinkerService" />
+        <service android:name=".tinker.CustomResultService" />
 
         <!--&lt;!&ndash;gradle文件不需要这个，命令行需要&ndash;&gt;-->
         <!--&lt;!&ndash;实际开发中，tinker_id_后面跟的一串数字是versionName或者versioncode&ndash;&gt;-->

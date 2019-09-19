@@ -119,8 +119,17 @@ dependencies {
 //变量语句块
 ext {
     tinkerEnabled = true
-    tinkerOldApkPath = "${bakPath}/app-0919-18-13-49"
+
     tinkerId = "1.0"
+
+//    //不用多渠道打包
+//    tinkerOldApkPath = "${bakPath}/app-release-0919-20-57-55.apk"
+//    tinkerApplyMappingPath = "${bakPath}/app-release-0919-20-57-55-mapping.txt"
+//    tinkerApplyResourcePath = "${bakPath}/app-release-0919-20-57-54-R.txt"
+//    tinkerBuildFlavorDirectory = "${bakPath}/app-release-0919-20-57-55"
+
+    //多渠道打包
+    tinkerOldApkPath = "${bakPath}/app-0919-18-13-49"
     tinkerApplyMappingPath = "${bakPath}/app-0919-18-13-49"
     tinkerApplyResourcePath = "${bakPath}/app-0919-18-13-49"
     tinkerBuildFlavorDirectory = "${bakPath}/app-0919-18-13-49"
