@@ -3,7 +3,7 @@ package com.kevin;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.kevin.classloader.R;
+import com.kevin.classLoader.R;
 
 import java.io.File;
 import java.lang.reflect.Method;
