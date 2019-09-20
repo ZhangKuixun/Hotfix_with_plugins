@@ -1,8 +1,7 @@
-package com.kevin.tinker;
+package com.kevin.tinker.tinker;
 
 import android.content.Context;
 
-import com.kevin.tinker.tinker.TinkerService;
 import com.kevin.tinker.utils.MD5Util;
 import com.tencent.tinker.lib.listener.DefaultPatchListener;
 import com.tencent.tinker.lib.tinker.Tinker;

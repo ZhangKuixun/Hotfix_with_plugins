@@ -3,7 +3,6 @@ package com.kevin.tinker.tinker;
 import android.content.Context;
 import android.util.Log;
 
-import com.kevin.tinker.CustomPatchListener;
 import com.tencent.tinker.entry.ApplicationLike;
 import com.tencent.tinker.lib.patch.UpgradePatch;
 import com.tencent.tinker.lib.reporter.DefaultLoadReporter;
