@@ -39,12 +39,22 @@ public class TinkerService extends Service {
                     downloadPatch();
                     break;
             }
-
         }
     };
 
     public static void runPatchService(Context context, String path) {
+        //可以加载patch文件
 
+    }
+
+    //对外提供启动service的方法
+    public static void startService(Context context) {
+        try {
+            Intent intent = new Intent(context, TinkerService.class);
+            context.startService(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -93,8 +103,8 @@ public class TinkerService extends Service {
 
         //请求服务器，下载文件。
 
-        //////下载成功，将我们下载好的patch文件添加到我们的andfix中
-        ////////////TinkerManager.getInstance().addPatch(mPatchFile);
+        //////下载成功，将我们下载好的patch文件，load到我们的apk。
+        ////////////TinkerManager.getInstance().loadPatch(mPatchFile);
 
         //////下载失败，stopSelf();
     }

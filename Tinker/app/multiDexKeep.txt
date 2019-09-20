@@ -1,5 +1,5 @@
 
-com/kevin/tinker/tinker/MyTinkerApplication.class
+com/kevin/tinker/application/MyApplication.class
 com/kevin/tinker/tinker/CustomTinkerLike.class
 com/kevin/tinker/tinker/TinkerManager.class
 

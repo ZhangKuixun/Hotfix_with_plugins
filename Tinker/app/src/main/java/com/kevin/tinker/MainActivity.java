@@ -8,9 +8,8 @@ import android.view.View;
 
 import com.kevin.tinker.data.BasePatchInfo;
 import com.kevin.tinker.tinker.TinkerManager;
+import com.kevin.tinker.tinker.TinkerService;
 import com.umeng.analytics.MobclickAgent;
-
-import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,13 +24,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mPatchDir = getExternalCacheDir().getAbsoluteFile() + "/tpatch/";
-        //为了创建我们的文件夹
-        File file = new File(mPatchDir);
-        if (file == null || file.exists()) {
-            file.mkdir();
-        }
+//        mPatchDir = getExternalCacheDir().getAbsoluteFile() + "/tpatch/";
+//        //为了创建我们的文件夹
+//        File file = new File(mPatchDir);
+//        if (file == null || file.exists()) {
+//            file.mkdir();
+//        }
 
+        TinkerService.startService(this);
     }
 
     public void loadPatch(View view) {

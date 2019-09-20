@@ -34,10 +34,8 @@ public class TinkerManager {
 
         mPatchListener = new CustomPatchListener(getApplicationContext());//初始化CustomPatchListener
 
-        TinkerInstaller.install(mAppLike);//完成Tinker初始化
-
-        DefaultLoadReporter loadReporter = new DefaultLoadReporter(getApplicationContext());
-        DefaultPatchReporter patchReporter = new DefaultPatchReporter(getApplicationContext());
+        DefaultLoadReporter loadReporter = new DefaultLoadReporter(getApplicationContext());//是在加载过程中异常监听回调
+        DefaultPatchReporter patchReporter = new DefaultPatchReporter(getApplicationContext());//过了加载阶段，在patch文件合成阶段发生异常监听回调
 
         UpgradePatch upgradePatchProcessor = new UpgradePatch();//决定patch文件的安装策略，这个在实际开发中基本不会去自定义
 
