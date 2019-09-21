@@ -69,3 +69,7 @@ Tinker/app/src/test/
 
 Tinker/tinker-patch-cli-工具/output/
 AndFix/app/release/app.aab
+ClassLoader/bundle/src/androidTest/
+ClassLoader/bundle/src/test/
+Small/app/src/androidTest/
+Small/app/src/test/

@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         //初始化classLoader
         DexClassLoader classLoader = new DexClassLoader(
                 apkPath,
-                optDir.getAbsolutePath(),//解压到哪个内部路径下
+                optDir.getAbsolutePath(),//将插件apk解压到哪个目录中，必须是data/data/
                 null,//搜索路径
-                this.getClassLoader());//父classLoader
+                this.getClassLoader());//当前classLoader的父classLoader
 
         try {
             Class cls = classLoader.loadClass("com.kevin.bundle.BundleUtil");
