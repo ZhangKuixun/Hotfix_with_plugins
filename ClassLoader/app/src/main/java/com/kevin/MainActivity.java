@@ -26,17 +26,17 @@ public class MainActivity extends AppCompatActivity {
         //初始化classLoader
         DexClassLoader classLoader = new DexClassLoader(
                 apkPath,
-                optDir.getAbsolutePath(),
-                null,
-                this.getClassLoader());
+                optDir.getAbsolutePath(),//解压到哪个内部路径下
+                null,//搜索路径
+                this.getClassLoader());//父classLoader
 
         try {
             Class cls = classLoader.loadClass("com.kevin.bundle.BundleUtil");
             if (cls != null) {
 
-                Object instacne = cls.newInstance();
-                Method method = cls.getMethod("printLog");
-                method.invoke(instacne);
+                Object instance = cls.newInstance();//获取一个实例
+                Method method = cls.getMethod("printLog");//调用的方法
+                method.invoke(instance);
             }
         } catch (Exception e) {
             e.printStackTrace();
