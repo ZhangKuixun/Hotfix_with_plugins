@@ -63,7 +63,6 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
-*.xml
 Tinker/app/src/androidTest/
 Tinker/app/src/test/
 
@@ -73,3 +72,4 @@ ClassLoader/bundle/src/androidTest/
 ClassLoader/bundle/src/test/
 Small/app/src/androidTest/
 Small/app/src/test/
+.idea/
