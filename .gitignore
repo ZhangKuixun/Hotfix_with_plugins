@@ -73,3 +73,4 @@ ClassLoader/bundle/src/test/
 Small/app/src/androidTest/
 Small/app/src/test/
 .idea/
+Small/build-small/
