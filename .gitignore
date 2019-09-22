@@ -74,3 +74,5 @@ Small/app/src/androidTest/
 Small/app/src/test/
 .idea/
 Small/build-small/
+Atlas/app/src/androidTest/
+Atlas/app/src/test/
