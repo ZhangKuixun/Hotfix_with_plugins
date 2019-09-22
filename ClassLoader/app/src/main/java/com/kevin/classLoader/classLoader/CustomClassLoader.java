@@ -41,7 +41,7 @@ public class CustomClassLoader extends DexClassLoader {
             int bufferSize = 4096;//每次读取缓存大小
             byte[] buffer = new byte[bufferSize];//缓存字节数组
             int bytesNumRead = -1;//读取的索引
-            while ((bytesNumRead = inputStream.read(buffer)) != -1) {//先获取每次读了多少，如果不等于-1，表面文件没有读完，就在while中读，读到buffer缓存数组中
+            while ((bytesNumRead = inputStream.read(buffer)) != -1) {//先获取每次读了多少，如果不等于-1，表明文件没有读完，就在while中读，读到buffer缓存数组中
                 baos.write(buffer, 0, bytesNumRead);//再把buffer写入到字节输出流中。参数1-缓存字节码数组，参数2-起始位置，参数3-结尾位置
             }
             return baos.toByteArray();

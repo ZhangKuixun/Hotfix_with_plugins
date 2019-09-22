@@ -15,7 +15,8 @@ import dalvik.system.DexClassLoader;
  *
  * 这里只限于模拟
  */
-public class PluginManager {
+//second
+public class PluginManager { 
     public static PluginManager mInstance;
 
     private static Context mContext;
@@ -57,6 +58,7 @@ public class PluginManager {
         pluginInfo.mClassLoader = createPluginClassLoader(apkPath);
         pluginInfo.mAssetManager = createAssetManager(apkPath);
         pluginInfo.mResources = createPluginResources(apkPath);
+        
         // third 每次加载插件都要创建PluginInfo会很慢。解决：将插件中的信息保存起来。
 
         mPluginMap.put(apkPath, pluginInfo);

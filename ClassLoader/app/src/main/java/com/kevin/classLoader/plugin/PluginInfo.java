@@ -6,8 +6,9 @@ import android.content.res.Resources;
 import dalvik.system.DexClassLoader;
 
 /**
- * 插件实体类。这个类代表我们要获取的每个插件的信息，这个类中的这些信息我们要关心。
+ * 插件实体类。这个类代表我们要获取的插件的信息，这个类中的这些信息我们要关心。
  */
+//first
 public class PluginInfo {
 
     public DexClassLoader mClassLoader;//插件中的类需要这个classLoader去加载
