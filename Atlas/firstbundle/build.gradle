@@ -1,0 +1,50 @@
+apply plugin: 'com.taobao.atlas.library'
+apply plugin: 'com.taobao.atlas' //应用 com.taobao.atlas 插件
+
+atlas {
+    bundleConfig {
+        awbBundle true //重要。awbBundle为true，表面这个一个bundle工程。会生成awb文件，也就是最后打入包中的so文件。
+    }
+    buildTypes {
+        debug {
+            //基线版本的位置。
+            baseApFile project.rootProject.file('app/build/outputs/apk/debug/app-debug.ap')
+        }
+    }
+}
+
+android {
+    compileSdkVersion 28
+
+    //这里面不能配置applicationId
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //依赖编译，但是不会打入包中
+    providedCompile project(':librarybundle')
+}

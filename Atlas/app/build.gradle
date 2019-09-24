@@ -1,4 +1,9 @@
+group = 'com.kevin.atlas'//生成本地maven目录
+version = getEnvValue("versionName", "1.0.0")
+def apVersion = getEnvValue("apVersion", "")
+
 apply plugin: 'com.android.application'
+apply plugin: 'com.taobao.atlas' //应用 com.taobao.atlas 插件
 
 android {
     compileSdkVersion 28
@@ -7,9 +12,11 @@ android {
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName version
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = false
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -25,4 +32,74 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    compile("com.taobao.android:atlas_core:5.1.0.9-rc26") {//atlas核心库
+        transitive = true
+    }
+    compile 'com.taobao.android:atlasupdate:1.1.4@aar'//atlas框架更新功能相关的库
+
+    //这种依赖会当成bundle，打包会打包到apk的lib下，也就是我们的插件了
+    bundleCompile project(':firstbundle')
+    bundleCompile project(':librarybundle')
+    bundleCompile project(':remotebundle')
+}
+
+atlas {
+    atlasEnabled true  //atlas开关，一般接入后都打开
+
+    tBuildConfig {
+        autoStartBundles = ['com.kevin.firstbundle'] //自启动bundle配置，跟随应用启动而加载;普通bundle是随运行而加载
+        preLaunch = 'com.kevin.atlas.DemoPreLaunch' //AppApplication 启动之前调用，这个类下面放出代码。比如崩溃信息的统计。
+        outOfApkBundles = ['remotebundle']      //远程module，列表，可填多个
+    }
+
+    patchConfigs {
+        debug {
+            createTPatch true
+        }
+    }
+    buildTypes {
+        debug {
+            if (apVersion) {
+                //基线版本坐标
+                baseApDependency "com.taobao.android.atlasdemo:AP-debug:${apVersion}@ap"
+                patchConfig patchConfigs.debug
+            }
+        }
+    }
+}
+
+String getEnvValue(key, defValue) {
+    def val = System.getProperty(key);
+    if (null != val) {
+        return val;
+    }
+    val = System.getenv(key);
+    if (null != val) {
+        return val;
+    }
+    return defValue;
+}
+
+
+//配置maven-publish
+
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+publishing {
+    repositories {
+        mavenLocal()
+    }
+}
+
+publishing {
+    publications {
+        // 默认本地仓库地址  用户目录/.m2/repository/
+        maven(MavenPublication) {
+            //读取ap目录上传maven
+            artifact "${project.buildDir}/outputs/apk/debug/${project.name}-debug.ap"
+            artifactId "AP-debug" //生成本地maven文件夹
+        }
+    }
 }
