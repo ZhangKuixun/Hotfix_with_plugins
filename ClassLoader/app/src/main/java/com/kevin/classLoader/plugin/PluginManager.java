@@ -10,13 +10,13 @@ import java.util.HashMap;
 
 import dalvik.system.DexClassLoader;
 
+//第二部
 /**
  * 管理所有的插件
  *
  * 这里只限于模拟
  */
-//second
-public class PluginManager { 
+public class PluginManager {
     public static PluginManager mInstance;
 
     private static Context mContext;

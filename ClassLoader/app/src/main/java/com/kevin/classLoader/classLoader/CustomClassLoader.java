@@ -13,7 +13,7 @@ public class CustomClassLoader extends DexClassLoader {
         super(dexPath, optimizedDirectory, librarySearchPath, parent);
     }
 
-    //要以何种策略加载class文件。我们这里知识模拟加载,没有任何策略
+    //second 要以何种策略加载class文件。我们这里只是模拟加载,没有任何策略
     @Override
     protected Class<?> findClass(String name) throws ClassNotFoundException {
 
@@ -32,7 +32,7 @@ public class CustomClassLoader extends DexClassLoader {
         }
     }
 
-    //加载class字节码
+    //first 加载class字节码
     private byte[] getClassData(String name) {
         try {
             FileInputStream inputStream = new FileInputStream(name);
