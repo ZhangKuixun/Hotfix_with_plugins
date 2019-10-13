@@ -1,5 +1,5 @@
-apply plugin: 'com.taobao.atlas.library'
-apply plugin: 'com.taobao.atlas' //应用 com.taobao.atlas 插件
+apply plugin: 'com.android.library'
+apply plugin: 'com.taobao.atlas'
 
 atlas {
     bundleConfig {
@@ -44,6 +44,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    compile lib_atlas_core
 
     //依赖编译，但是不会打入包中
     providedCompile project(':librarybundle')

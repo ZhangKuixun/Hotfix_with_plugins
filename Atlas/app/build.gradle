@@ -25,30 +25,10 @@ android {
     }
 }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    compile("com.taobao.android:atlas_core:5.1.0.9-rc26") {//atlas核心库
-        transitive = true
-    }
-    compile 'com.taobao.android:atlasupdate:1.1.4@aar'//atlas框架更新功能相关的库
-
-    //这种依赖会当成bundle，打包会打包到apk的lib下，也就是我们的插件了
-    bundleCompile project(':firstbundle')
-    bundleCompile project(':librarybundle')
-    bundleCompile project(':remotebundle')
-}
-
 atlas {
     atlasEnabled true  //atlas开关，一般接入后都打开
 
     tBuildConfig {
-        autoStartBundles = ['com.kevin.firstbundle'] //自启动bundle配置，跟随应用启动而加载;普通bundle是随运行而加载
         preLaunch = 'com.kevin.atlas.DemoPreLaunch' //AppApplication 启动之前调用，这个类下面放出代码。比如崩溃信息的统计。
         outOfApkBundles = ['remotebundle']      //远程module，列表，可填多个
     }
@@ -68,6 +48,25 @@ atlas {
         }
     }
 }
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    compile lib_atlas_core
+    compile lib_atlas_update//atlas框架更新功能相关的库
+
+    //这种依赖会当成bundle，打包会打包到apk的lib下，也就是我们的插件了
+    bundleCompile project(':firstbundle')
+    bundleCompile project(':librarybundle')
+    bundleCompile project(':remotebundle')
+}
+
 
 String getEnvValue(key, defValue) {
     def val = System.getProperty(key);

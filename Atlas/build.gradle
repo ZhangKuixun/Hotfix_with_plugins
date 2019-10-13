@@ -4,29 +4,31 @@ buildscript {
     repositories {
         google()
         mavenLocal()
-
         jcenter()
-        
+
     }
     configurations.all {
         resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
     }
     dependencies {
-//        classpath 'com.android.tools.build:gradle:3.4.1' //注意尽量不要指定 classpath "com.android.tools.build:gradle"的版本
-
+        //注意尽量不要指定 classpath "com.android.tools.build:gradle"的版本
         classpath "com.taobao.android:atlasplugin:3.0.1-rc88"
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
-allprojects {
+ext {
+    lib_atlas_core = "com.taobao.android:atlas_core:5.1.0.9-rc26"
+    lib_atlas_update = "com.taobao.android:atlasupdate:1.1.4"
+}
+
+subprojects {
     repositories {
         google()
         jcenter()
-        
+
     }
+
     configurations {
         compileProject.extendsFrom compile, archives
         runtimeProject.extendsFrom runtime, archives
